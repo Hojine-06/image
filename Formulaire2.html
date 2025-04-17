@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>demande d'emploi</title>
+<style>
+    body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            
+            background: url('http://localhost/formulaire/pictures/matricee.gif') no-repeat center center fixed;
+    background-size: cover;
+            color: yellow;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;  /* Change de 'center' à 'flex-start' pour aligner le formulaire en haut */
+            min-height: 100vh;  /* Utilise toute la hauteur de la fenêtre */
+            position: relative;
+            overflow-y: auto;  /* Permet le défilement vertical */
+        } 
+    
+        form {
+            width: 400px;
+            height: auto; 
+    max-height: 910px; 
+            background: rgba(7, 9, 3, 0.626);
+            padding: 20px;
+            border-radius: 10px;
+             
+            box-shadow: 0 0 20px #00ff00;
+            
+            box-sizing: border-box;
+        }
+        h2 {
+            color: blue;
+            text-align: center;
+            font-size: 36px;
+            text-shadow: 0 0 15px #00ff00;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #0c0c0c;
+            border-radius: 5px;
+            background-color: white;
+            color: black;
+            font-size: 14px;
+            outline: none;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+    .error {
+        color: red;
+        font-size: 0.9em;
+    }
+    input[type="submit"] {
+            background-color: #00ff00;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            text-shadow: 0 0 15px #00ff00;
+        }
+        input[type="submit"]:hover {
+            background-color: #00cc00;
+            text-shadow: 0 0 25px #121312
+        }
+        
+</style>
+</head>
+<body>
+    <div class="container">
+        <h2>INSCRIPTION</h2>
+<form method="post"  action="exemple6.5.php" >
+    
+<fieldset>
+
+<div>
+<span>
+Nom<input type="text" name="ident[]" />
+Prénom<input type="text" name="ident[]" />
+Âge<input type="number" step="1" name="ident[]" />
+<br /><br />
+Langues pratiquées<br />
+<select name="lang[]" multiple="multiple">
+<option value="français"> français</option>
+<option value="anglais"> anglais</option>
+<option value="allemand"> allemand</option>
+<option value="espagnol"> espagnol</option>
+</select><br /><br />
+Compétences informatiques<br />
+HTML 5<input type="checkbox" name="competent[]" value="HTML 5" />
+CSS 3<input type="checkbox" name="competent[]" value="CSS 3" />
+PHP<input type="checkbox" name="competent[]" value="PHP" />
+MySQL<input type="checkbox" name="competent[]" value="MySQL" />
+</span><br /><br />
+<input type="reset" value="EFFACER"/>
+<input type="submit" value="ENVOI"/>
+</div>
+</fieldset>
+</form>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (event) {
+        let isValid = true;
+        
+        // Supprimer les messages d'erreur existants
+        const errors = document.querySelectorAll(".error");
+        errors.forEach(error => error.remove());
+        
+        // Vérifier les champs texte et nombre
+        const inputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+        inputs.forEach(input => {
+            if (input.value.trim() === "") {
+                showError(input, "Ce champ est requis.");
+                isValid = false;
+            }
+        });
+
+        // Vérifier la sélection des langues
+        const langues = document.querySelector('select[name="lang[]"]');
+        if (langues.selectedOptions.length === 0) {
+            showError(langues, "Veuillez sélectionner au moins une langue.");
+            isValid = false;
+        }
+
+        // Vérifier les compétences
+        const competences = document.querySelectorAll('input[name="competent[]"]:checked');
+        if (competences.length === 0) {
+            const checkboxGroup = document.querySelector('input[name="competent[]"]').parentNode;
+            showError(checkboxGroup, "Veuillez cocher au moins une compétence.");
+            isValid = false;
+        }
+
+        // Si le formulaire n'est pas valide, empêcher l'envoi
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+
+    // Fonction pour afficher un message d'erreur sous le champ concerné
+    function showError(element, message) {
+        const error = document.createElement("div");
+        error.classList.add("error");
+        error.textContent = message;
+
+        // Si l'élément est un <select> ou un <input>, on insère l'erreur juste après lui
+        element.insertAdjacentElement("afterend", error);
+    }
+});
+</script>
+    
+
+</body>
+</html>

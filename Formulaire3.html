@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire d'adhésion - Club d'Échecs</title>
+    <style>
+        
+        body {
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            
+            background: url('http://localhost/formulaire/pictures/matricee.gif') no-repeat center center fixed;
+    background-size: cover;
+            color: yellow;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;  /* Change de 'center' à 'flex-start' pour aligner le formulaire en haut */
+            min-height: 100vh;  /* Utilise toute la hauteur de la fenêtre */
+            position: relative;
+            overflow-y: auto;  /* Permet le défilement vertical */
+        }
+        
+        form {
+            width: 400px;
+            height: auto; 
+    max-height: 910px; 
+            background: rgba(7, 9, 3, 0.626);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #00ff00;
+            
+            box-sizing: border-box;
+        }
+
+        
+            h2 {
+            color: blue;
+            text-align: center;
+            font-size: 36px;
+            text-shadow: 0 0 15px #00ff00;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #0c0c0c;
+            border-radius: 5px;
+            background-color: white;
+            color: black;
+            font-size: 14px;
+            outline: none;
+        }
+        input[type="radio"], input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        input[type="submit"] {
+            background-color: #00ff00;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            text-shadow: 0 0 15px #00ff00;
+        }
+        input[type="submit"]:hover {
+            background-color: #00cc00;
+            text-shadow: 0 0 25px #121312
+        }
+
+        
+            
+    </style>
+</head>
+<body>
+    
+    <div>
+   
+        <h2>Formulaire d'adhésion</h2>
+  
+   <form id="adhesionForm" action="traitement.php" method="post">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom">
+        <span class="error" id="nomError"></span>
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" id="prenom" name="prenom">
+        <span class="error" id="prenomError"></span>
+
+        <label for="date_naissance">Date de naissance :</label>
+        <input type="date" id="date_naissance" name="date_naissance">
+        <span class="error" id="dateError"></span>
+
+        <label for="telephone">Numéro de téléphone :</label>
+        <input type="tel" id="telephone" name="telephone">
+        <span class="error" id="telError"></span>
+
+        <label for="adresse">Adresse :</label>
+        <input type="text" id="adresse" name="adresse">
+        <span class="error" id="adresseError"></span>
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email">
+        <span class="error" id="emailError"></span>
+
+        <label for="profession">Profession :</label>
+        <select id="profession" name="profession">
+            <option value="">-- Sélectionnez --</option>
+            <option value="étudiant">Étudiant</option>
+            <option value="salarié">Salarié</option>
+            <option value="indépendant">Indépendant</option>
+            <option value="autre">Autre</option>
+        </select>
+        <span class="error" id="professionError"></span>
+        
+        <label for="autre_profession">Si "Autre", précisez :</label>
+        <input type="text" id="autre_profession" name="autre_profession" disabled>
+
+        <label>Centres d'intérêt :</label><br>
+        <input type="checkbox" name="centres[]" value="compétition"> Compétition <br>
+        <input type="checkbox" name="centres[]" value="casual"> Jeu casual <br>
+        <input type="checkbox" name="centres[]" value="formation"> Formation <br>
+        <input type="checkbox" name="centres[]" value="spectateur"> Spectateur <br>
+        <span class="error" id="centresError"></span><br>
+
+        <label>Niveau de jeu :</label> <br>
+        <input type="radio" name="niveau" value="débutant"> Débutant <br>
+        <input type="radio" name="niveau" value="intermédiaire"> Intermédiaire <br>
+        <input type="radio" name="niveau" value="confirmé"> Confirmé <br>
+        <span class="error" id="niveauError"></span><br>
+
+        <label for="motivations">Motivations :</label>
+        <textarea id="motivations" name="motivations" rows="4"></textarea>
+        <span class="error" id="motivationsError"></span>
+
+        <input type="submit" value="S'inscrire">
+    </div>
+    </form>
+
+    <script>
+        document.getElementById("adhesionForm").addEventListener("submit", function(event) {
+            let isValid = true;
+
+            let nom = document.getElementById("nom").value.trim();
+            let prenom = document.getElementById("prenom").value.trim();
+            let date_naissance = document.getElementById("date_naissance").value;
+            let telephone = document.getElementById("telephone").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let profession = document.getElementById("profession").value;
+            let motivations = document.getElementById("motivations").value.trim();
+
+            let nomError = document.getElementById("nomError");
+            let prenomError = document.getElementById("prenomError");
+            let dateError = document.getElementById("dateError");
+            let telError = document.getElementById("telError");
+            let emailError = document.getElementById("emailError");
+            let professionError = document.getElementById("professionError");
+            let motivationsError = document.getElementById("motivationsError");
+
+            nomError.textContent = "";
+            prenomError.textContent = "";
+            dateError.textContent = "";
+            telError.textContent = "";
+            emailError.textContent = "";
+            professionError.textContent = "";
+            motivationsError.textContent = "";
+
+            if (nom === "") {
+                nomError.textContent = "Le nom est obligatoire.";
+                isValid = false;
+            }
+            if (prenom === "") {
+                prenomError.textContent = "Le prénom est obligatoire.";
+                isValid = false;
+            }
+            if (date_naissance === "") {
+                dateError.textContent = "Veuillez entrer une date de naissance.";
+                isValid = false;
+            }
+            if (telephone === "" || !/^\d{10}$/.test(telephone)) {
+                telError.textContent = "Numéro de téléphone invalide.";
+                isValid = false;
+            }
+            if (email === "" || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                emailError.textContent = "Adresse email invalide.";
+                isValid = false;
+            }
+            if (profession === "") {
+                professionError.textContent = "Veuillez choisir une profession.";
+                isValid = false;
+            }
+            if (motivations === "") {
+                motivationsError.textContent = "Veuillez entrer vos motivations.";
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById("profession").addEventListener("change", function() {
+            let autreInput = document.getElementById("autre_profession");
+            autreInput.disabled = this.value !== "autre";
+        });
+
+
+        
+
+                
+
+        
+
+        
+
+        // Redimensionner le fond de l'écran au cas où la taille de la fenêtre change
+        window.onresize = generateMatrix;
+    </script>
+
+</body>
+</html>

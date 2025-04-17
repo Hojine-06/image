@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renseignement</title>
+    <style>
+    body {
+        font-family: 'Courier New', monospace;
+        margin: 0;
+        
+        background-color: beige;
+        color: yellow;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;  /* Change de 'center' à 'flex-start' pour aligner le formulaire en haut */
+        min-height: 100vh;  /* Utilise toute la hauteur de la fenêtre */
+        position: relative;
+        overflow-y: auto;  /* Permet le défilement vertical */
+    }
+    
+    form {
+        width: 400px;
+        height: auto; 
+max-height: 950px; 
+        background: rgba(3, 9, 6, 0.626);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #00ff00;
+        
+        box-sizing: border-box;
+    }
+
+    
+        h2 {
+        color: blue;
+        text-align: center;
+        font-size: 36px;
+        text-shadow: 0 0 15px #00ff00;
+    }
+    
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #0c0c0c;
+        border-radius: 5px;
+        background-color: white;
+        color: black;
+        font-size: 14px;
+        outline: none;
+    }
+    input[type="radio"], input[type="checkbox"] {
+        width: auto;
+        margin-right: 5px;
+    }
+    .error {
+        color: red;
+        font-size: 0.9em;
+    }
+    input[type="submit"] {
+        background-color: #00ff00;
+        color: black;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        text-shadow: 0 0 15px #00ff00;
+    }
+    input[type="submit"]:hover {
+        background-color: #00cc00;
+        text-shadow: 0 0 25px #121312
+    }
+
+    
+        
+</style>
+    </head>
+    <body>
+        <div>
+            <h2>INSCRIPTION AU STAGE</h2>
+        
+        <form method=”post” action=”trait.php”> 
+        
+            Identité<br> 
+            <input type="hidden" name="date" value="15/06/04"> 
+            <input type=text name=”nom” value=”Nom”>&nbsp; 
+            <input type=text name=”prénom” value=”Prénom”><br> 
+            <input type=text name=”date” value=”Date de 
+            naissance ”><br> 
+            Activité<br> 
+            <select name=”Activité”> 
+            <option value=”Collégien”>Collégien 
+            <option value=”Lycéen”>Lycéen 
+            <option value=”Etudiant”>Etudiant 
+            <option value=”Salarié”>Salarié 
+            <option value=”Fonctionnaire”>Fonctionnaire 
+            <option value=”Patron”>Patron 
+            </select><br> 
+            Qualification(s):<br> 
+            <input type=”checkbox” name=”choix1” value=”bafa”> 
+            BAFA<br> 
+            <input type=”checkbox” name=”choix2” value=”bafd”> 
+            BAFD<br> 
+            <input type=”checkbox” name=”choix3” value=”rien”> 
+            rien<br> 
+            Semaine choisie:<br> 
+            <input type=”radio” name=”semaine” value=”1”> 
+            1ère<br> 
+            <input type=”radio” name=”semaine” value=”2”> 
+            2ème<br> 
+            <input type=”radio” name=”semaine” value=”3”> 
+            3ème<br> 
+            Vos motivations :<br> 
+            <textarea name="motivations" rows=5 
+            cols=20></textarea><br> 
+            <input type="submit" name="envoi" value="envoyer"> 
+            &nbsp; 
+            <input type="reset" name="effacer" value="effacer"> 
+            </form> 
+           
+    </body>
