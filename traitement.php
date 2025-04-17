@@ -1,8 +1,7 @@
-
 <?php
 // Connexion à la base de données
 $host = 'localhost';
-$dbname = 'club_echecs';
+$dbname = 'inscrptions';
 $username = 'root'; // Par défaut, XAMPP utilise 'root' sans mot de passe
 $password = ''; // Par défaut, il n'y a pas de mot de passe
 
@@ -114,6 +113,16 @@ if ($stmt->rowCount() > 0) {
 
 <br>
 <a href="formechecs.html">⬅ Retour au formulaire</a>
+<?php
+// Inclusion de la connexion à la base de données
+require_once 'database.php';
 
+// Votre code ici (par exemple, récupérer ou insérer des données)
+$query = "SELECT * FROM utilisateurs";
+$stmt = $pdo->query($query);
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    echo $row['nom'];
+}
+?>
 </body>
 </html>
